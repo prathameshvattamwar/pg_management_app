@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PG Management Login Info</title>
+    <style>
+        /* General page styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* Container for login details */
+        .login-info {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            margin-bottom: 30px;
+        }
+
+        .login-info h2 {
+            color: #555;
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+
+        .login-info p {
+            margin: 5px 0;
+            font-size: 1.1em;
+            color: #666;
+        }
+
+        /* Enhanced button styling */
+        .fancy-button {
+            display: inline-block;
+            padding: 12px 24px;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #fff;
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            border: none;
+            border-radius: 25px;
+            text-decoration: none;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .fancy-button:hover {
+            background: linear-gradient(135deg, #a777e3, #6e8efb);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .fancy-button:active {
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            transform: translateY(1px);
+        }
+
+        /* Responsive design */
+        @media (max-width: 600px) {
+            .login-info {
+                padding: 15px;
+            }
+
+            .fancy-button {
+                font-size: 1em;
+                padding: 10px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>PG Management System</h1>
+
+    <!-- Admin Login Details -->
+    <div class="login-info">
+        <h2>Admin Login</h2>
+        <p><strong>Username:</strong> admin</p>
+        <p><strong>Password:</strong> pg123</p>
+    </div>
+
+    <!-- User Login Details -->
+    <div class="login-info">
+        <h2>User Login</h2>
+        <p><strong>Contact:</strong> 9876543210</p>
+        <p><strong>Password:</strong> user123</p>
+    </div>
+
+    <!-- Fancy Button -->
+    <a href="https://pg-management-ten.vercel.app/" target="_blank" class="fancy-button">Visit PG Management App</a>
+</body>
+</html>
