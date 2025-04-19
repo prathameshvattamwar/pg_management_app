@@ -3,7 +3,7 @@
 
 1.  **Clone the repository (or download the code):**
     ```bash
-    git clone <https://github.com/prathameshvattamwar/pg_management_system>
+    git clone https://github.com/prathameshvattamwar/pg_management_system
     cd PG-MANAGEMENT
     ```
 2.  **Open `index.html`:** Open the `index.html` file directly in your web browser.
