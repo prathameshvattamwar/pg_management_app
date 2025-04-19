@@ -3,107 +3,206 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PG Management System - Demo Link</title>
+    <title>[Your Name] - PG Management System Project</title>
     <!-- Google Font Import -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Roboto+Slab:wght@700&display=swap" rel="stylesheet">
+    <!-- Simple Icon Placeholder (Can use FontAwesome/Bootstrap Icons later) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
 
     <style>
-        /* Basic Reset & Body Styling */
+        /* === Globals & Reset === */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth; /* Enable smooth scrolling */
+            font-size: 16px; /* Base font size */
+        }
+
         body {
             font-family: 'Poppins', sans-serif;
+            color: #4a4a4a;
+            line-height: 1.8;
+            background-color: #f8f9fa; /* Light background */
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+
+        /* === Navigation === */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            padding: 1rem 5%;
             display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            transition: background-color 0.3s ease;
+        }
+
+        .nav-logo {
+            font-family: 'Roboto Slab', serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #2c3e50;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #34495e;
+            font-weight: 600;
+            font-size: 0.95rem;
+            padding-bottom: 5px;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #007bff;
+            transition: width 0.4s ease;
+        }
+
+        .nav-links a:hover {
+            color: #007bff;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Mobile Nav Toggle */
+        .nav-toggle {
+            display: none; /* Hidden by default */
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: #34495e;
+        }
+
+
+        /* === Sections === */
+        .section {
+            padding: 100px 5%; /* Add top padding for fixed navbar */
+            min-height: 80vh; /* Give some height to sections */
+            display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            /* Enhanced Background Gradient */
-            background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%);
-            color: #333;
-            line-height: 1.7;
-            padding: 20px;
-        }
-
-        /* Main Content Card */
-        .card {
-            background-color: #ffffff;
-            padding: 40px 50px;
-            border-radius: 15px;
-            /* Softer, more layered shadow */
-            box-shadow: 0 15px 35px rgba(50, 50, 93, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);
-            max-width: 650px;
-            width: 90%;
             text-align: center;
-            /* Subtle entrance animation */
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInCard 0.8s 0.3s ease-out forwards;
+            opacity: 0; /* Initially hidden for animation */
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
         }
 
-        @keyframes fadeInCard {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        /* Animation Trigger (Use JS later if needed, for now just generic) */
+        .section.visible {
+             opacity: 1;
+             transform: translateY(0);
         }
 
-        /* Card Header */
-        .card-header {
-            margin-bottom: 30px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid #eee;
+
+        .section:nth-child(odd) {
+             background-color: #ffffff; /* Alternate background */
+        }
+        .section:nth-child(even) {
+             background-color: #f1f5f8; /* Slightly different alternate */
         }
 
-        .card-header h1 {
-            font-size: 2.2em;
-            font-weight: 700;
-            /* Color variation */
+        .section-title {
+            font-family: 'Roboto Slab', serif;
+            font-size: 2.5rem;
             color: #2c3e50;
-            margin-bottom: 5px;
+            margin-bottom: 1rem;
+            position: relative;
+            padding-bottom: 0.5rem;
         }
 
-        .card-header .subtitle {
-            font-size: 1em;
-            color: #555;
-            font-weight: 300;
+        .section-title::after { /* Underline effect */
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background-color: #007bff;
+            border-radius: 2px;
         }
 
-        /* Card Body */
-        .card-body p {
-            margin-bottom: 15px;
-            font-size: 1.05em;
-            color: #4a4a4a;
+        .container {
+            max-width: 900px;
+            width: 100%;
+            margin: 2rem auto 0 auto; /* Add top margin below title */
         }
 
-        /* Enhanced Button Styling */
-        .project-button {
-            display: inline-block;
-            /* Gradient Button */
+        /* === Hero Section (#home) === */
+        #home {
+            background: linear-gradient(135deg, rgba(224, 234, 252, 0.8) 0%, rgba(207, 222, 243, 0.8) 100%), url('https://via.placeholder.com/1500x800/ddeeff/99aabb?text=Subtle+Background+Texture') no-repeat center center/cover; /* Example background */
+            min-height: 100vh; /* Full viewport height */
+            color: #2c3e50;
+            padding-top: 120px; /* More padding */
+        }
+
+        #home h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #1a2533;
+        }
+
+        #home .subtitle {
+             font-size: 1.4rem;
+             font-weight: 300;
+             color: #34495e;
+             margin-bottom: 2rem;
+        }
+
+        #home p {
+            max-width: 700px;
+            margin: 0 auto 2.5rem auto;
+            font-size: 1.1rem;
+        }
+
+        .project-button { /* Reusing button style */
+             display: inline-block;
             background-image: linear-gradient(45deg, #007bff 0%, #0056b3 100%);
             color: #ffffff;
-            padding: 14px 35px;
-            border-radius: 50px; /* Pill shape */
+            padding: 16px 40px;
+            border-radius: 50px;
             text-decoration: none;
             font-weight: 600;
-            font-size: 1.1em;
+            font-size: 1.15rem;
             letter-spacing: 0.5px;
-            transition: all 0.4s ease; /* Smooth transition for all properties */
-            margin-top: 25px;
+            transition: all 0.4s ease;
             border: none;
             cursor: pointer;
-            box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3); /* Shadow matching button color */
+            box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
             position: relative;
-            overflow: hidden; /* For pseudo-element effect */
+            overflow: hidden;
             z-index: 1;
         }
 
-        /* Hover shine effect */
         .project-button::before {
             content: '';
             position: absolute;
@@ -116,60 +215,355 @@
             z-index: -1;
         }
 
-        .project-button:hover::before {
-            left: 100%;
+        .project-button:hover::before { left: 100%; }
+        .project-button:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 8px 20px rgba(0, 123, 255, 0.4); }
+        .project-button:active { transform: translateY(-1px) scale(1); box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3); }
+
+
+        /* === About Me Section (#about) === */
+         #about .container {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 3rem;
+            text-align: left;
+            align-items: center;
+        }
+         #about .profile-pic {
+             width: 200px;
+             height: 200px;
+             border-radius: 50%;
+             object-fit: cover;
+             margin: 0 auto; /* Center pic in grid cell */
+             border: 5px solid #007bff;
+             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+         }
+        #about h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: #34495e;
+        }
+        #about p {
+            margin-bottom: 1rem;
+        }
+         #about .skills span {
+            display: inline-block;
+            background-color: #e9ecef;
+            color: #495057;
+            padding: 5px 12px;
+            border-radius: 15px;
+            margin: 5px 5px 5px 0;
+            font-size: 0.9rem;
+         }
+
+
+        /* === Project Story Section (#story) === */
+        #story p {
+             max-width: 800px;
+             margin-left: auto;
+             margin-right: auto;
         }
 
-        .project-button:hover {
-            transform: translateY(-3px) scale(1.02); /* Lift and slightly enlarge */
-            box-shadow: 0 8px 20px rgba(0, 123, 255, 0.4);
+        /* === Development Section (#development) === */
+        #development .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            text-align: left;
+        }
+         #development .dev-card {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+         }
+         #development h3 {
+            font-size: 1.5rem;
+            color: #007bff;
+            margin-bottom: 1rem;
+         }
+         #development ul {
+            list-style: none; /* Remove default bullets */
+            padding-left: 0;
+         }
+          #development ul li {
+            margin-bottom: 0.75rem;
+            position: relative;
+            padding-left: 25px;
+          }
+          #development ul li::before { /* Custom bullet */
+             content: '\f00c'; /* FontAwesome check icon */
+             font-family: 'Font Awesome 6 Free';
+             font-weight: 900;
+             position: absolute;
+             left: 0;
+             top: 4px;
+             color: #28a745; /* Green */
+             font-size: 0.9rem;
+          }
+         #development .challenges li::before {
+             content: '\f06a'; /* FontAwesome warning/exclamation icon */
+             color: #ffc107; /* Yellow */
+         }
+
+
+        /* === Contact Section (#contact) === */
+        #contact p {
+             margin-bottom: 2rem;
+        }
+        .contact-links a {
+            font-size: 1.8rem; /* Larger icons */
+            color: #34495e;
+            margin: 0 1rem;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+        .contact-links a:hover {
+            color: #007bff;
+            transform: scale(1.1);
         }
 
-        .project-button:active {
-             transform: translateY(-1px) scale(1); /* Push down effect */
-             box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+
+        /* === Footer === */
+        .footer {
+            text-align: center;
+            padding: 2rem 5%;
+            background-color: #e9ecef;
+            color: #6c757d;
+            font-size: 0.9rem;
+            margin-top: 50px; /* Space above footer */
         }
 
-        /* Note Styling */
-        .note {
-            margin-top: 35px;
-            font-size: 0.9em;
-            color: #888;
-            font-style: italic;
-        }
+        /* === Responsive Design === */
+        @media (max-width: 768px) {
+            html { font-size: 15px; } /* Slightly smaller base */
 
-        /* Responsive adjustments */
-        @media (max-width: 600px) {
-            .card {
-                padding: 30px 25px;
+            .nav-links {
+                display: none; /* Hide links */
+                position: absolute;
+                top: 100%; /* Position below navbar */
+                left: 0;
+                width: 100%;
+                background-color: #ffffff;
+                flex-direction: column;
+                padding: 1rem 0;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
             }
-            .card-header h1 {
-                font-size: 1.8em;
+
+            .nav-links.active {
+                display: flex; /* Show when active */
             }
-            .project-button {
-                padding: 12px 30px;
-                font-size: 1em;
+
+            .nav-links li {
+                text-align: center;
+                margin: 0.5rem 0;
             }
+
+            .nav-toggle {
+                display: block; /* Show hamburger */
+            }
+
+            #home h1 { font-size: 2.5rem; }
+            #home .subtitle { font-size: 1.2rem; }
+
+            .section { padding: 80px 5%; }
+            .section-title { font-size: 2rem; }
+
+             #about .container {
+                 grid-template-columns: 1fr; /* Stack elements */
+                 text-align: center;
+             }
+             #about .profile-pic {
+                 margin-bottom: 1.5rem;
+                 width: 150px;
+                 height: 150px;
+             }
+              #about .about-text { order: 2; } /* Text below image */
+
+            #development .container { grid-template-columns: 1fr; } /* Stack cards */
         }
+
     </style>
 </head>
 <body>
-    <div class="card">
-        <div class="card-header">
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <a href="#home" class="nav-logo">[Your Name]</a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About Me</a></li>
+            <li><a href="#story">Project Story</a></li>
+            <li><a href="#development">Development</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="nav-toggle" id="navToggle">
+             <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="section visible"> <!-- Start visible -->
+        <div class="container">
             <h1>PG Management System</h1>
-            <p class="subtitle">Frontend Demo</p>
-        </div>
-        <div class="card-body">
-            <p>Explore a client-side demonstration of a Paying Guest accommodation management interface.</p>
-            <p>Developed using HTML, CSS, JavaScript, and Bootstrap 5, with data simulated via LocalStorage.</p>
-
-            <!-- *** REPLACE THIS href VALUE WITH YOUR VERCEL LINK *** -->
+            <p class="subtitle">A Frontend Demonstration</p>
+            <p>Explore a client-side application designed to manage Paying Guest accommodations, built with modern web technologies and utilizing browser storage.</p>
             <a href="https://pg-management-system-nine.vercel.app/" target="_blank" rel="noopener noreferrer" class="project-button">
-                Launch Live Demo →
+                View Live Demo →
             </a>
-
-            <p class="note">(This demo uses browser storage; data is not persistent. The source code repository is private.)</p>
         </div>
-    </div>
+    </section>
+
+    <!-- About Me Section -->
+    <section id="about" class="section">
+        <h2 class="section-title">About The Developer</h2>
+        <div class="container">
+            <img src="https://via.placeholder.com/200/007bff/ffffff?text=Your+Pic" alt="[Your Name]" class="profile-pic"> <!-- Replace with your photo URL -->
+            <div class="about-text">
+                <h3>Hi, I'm [Your Name]</h3>
+                <p>
+                    I'm a passionate Web Developer focused on creating intuitive and efficient user interfaces. This project was an opportunity to apply my skills in frontend technologies to build a practical application from the ground up.
+                </p>
+                <p>
+                    My goal was to leverage HTML, CSS, and JavaScript effectively, combined with the utility of Bootstrap 5, to deliver a functional and responsive user experience.
+                </p>
+                 <div class="skills">
+                    <strong>Skills Applied:</strong>
+                    <span>HTML5</span>
+                    <span>CSS3</span>
+                    <span>JavaScript (ES6+)</span>
+                    <span>Bootstrap 5</span>
+                    <span>DOM Manipulation</span>
+                    <span>LocalStorage API</span>
+                    <span>Responsive Design</span>
+                    <span>Git & GitHub</span>
+                     <span>Vercel Deployment</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Story Section -->
+    <section id="story" class="section">
+        <h2 class="section-title">The Project's Origin</h2>
+        <div class="container">
+            <p>
+                The idea for the PG Management System stemmed from [Explain your motivation - e.g., observing the need for simple management tools, wanting to practice specific skills, a personal requirement, a course project idea, etc.]. I wanted to create a tool that could handle common PG tasks like room and tenant management, payment tracking, and basic communication (notices/complaints) entirely on the client-side.
+            </p>
+            <p>
+                The focus was on demonstrating core frontend functionalities and data handling using readily available browser features like LocalStorage, serving as a proof-of-concept or a base for a more complex future system.
+            </p>
+        </div>
+    </section>
+
+    <!-- Development & Challenges Section -->
+    <section id="development" class="section">
+        <h2 class="section-title">Development Journey</h2>
+        <div class="container">
+            <div class="dev-card">
+                 <h3>Effort & Timeline</h3>
+                 <p>This project was developed over approximately <strong>[Number] days/weeks</strong>, involving:</p>
+                 <ul>
+                     <li>Initial planning and feature definition.</li>
+                     <li>Structuring the HTML and styling with Bootstrap/CSS.</li>
+                     <li>Implementing core JavaScript logic for CRUD operations.</li>
+                     <li>Handling data persistence with LocalStorage.</li>
+                     <li>Developing distinct Admin and Tenant dashboards.</li>
+                     <li>Refining the UI/UX and ensuring responsiveness.</li>
+                     <li>Debugging and testing across features.</li>
+                 </ul>
+            </div>
+             <div class="dev-card">
+                <h3>Challenges Faced</h3>
+                <p>Key challenges encountered during development included:</p>
+                <ul class="challenges">
+                    <li><strong>LocalStorage Limitations:</strong> Managing data relationships (rooms to tenants) and potential storage limits solely within LocalStorage required careful data structuring.</li>
+                    <li><strong>State Management:</strong> Ensuring UI consistency across different tabs and sections after data modifications without a dedicated state library.</li>
+                    <li><strong>Event Listener Scope:</strong> Handling event listeners correctly, especially after dynamically adding or cloning elements (like the complaint form fix).</li>
+                    <li><strong>Data Synchronization:</strong> Since it's client-side only, ensuring occupancy counts and dropdowns updated correctly after adding/deleting tenants was crucial.</li>
+                    <li><strong>Responsive Design:</strong> Adapting the tables and complex forms (like Add Room) for smaller screen sizes using Bootstrap effectively.</li>
+                     <li><strong>[Add another specific challenge you faced]</strong></li>
+                </ul>
+             </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <h2 class="section-title">Get In Touch</h2>
+        <div class="container">
+            <p>
+                Interested in learning more about this project or discussing web development? Feel free to reach out!
+            </p>
+            <div class="contact-links">
+                <!-- Replace # with your actual links -->
+                <a href="mailto:[your.email@example.com]" title="Email Me"><i class="fas fa-envelope"></i></a>
+                <a href="[Your LinkedIn Profile URL]" target="_blank" rel="noopener noreferrer" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="[Your GitHub Profile URL]" target="_blank" rel="noopener noreferrer" title="GitHub"><i class="fab fa-github"></i></a>
+                <!-- Add other relevant links like Portfolio website -->
+                <!-- <a href="[Your Portfolio URL]" target="_blank" rel="noopener noreferrer" title="Portfolio"><i class="fas fa-briefcase"></i></a> -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2024 [Your Name]. All Rights Reserved.</p>
+        <p>PG Management System Demo Page</p>
+    </footer>
+
+
+    <script>
+        // Simple Mobile Nav Toggle
+        const navToggle = document.getElementById('navToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        if (navToggle && navLinks) {
+            navToggle.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+            });
+            // Close menu when a link is clicked
+            navLinks.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                });
+            });
+        }
+
+        // Simple fade-in animation on scroll (basic version)
+        const sections = document.querySelectorAll('.section');
+        const observerOptions = {
+            root: null, // relative to the viewport
+            rootMargin: '0px',
+            threshold: 0.1 // Trigger when 10% of the section is visible
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                     // Optional: Unobserve after animation to save resources
+                     // observer.unobserve(entry.target);
+                }
+                 // Optional: Remove class if you want animation to repeat when scrolling back up
+                 // else {
+                 //    entry.target.classList.remove('visible');
+                 // }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => {
+             // Skip the first section if you want it visible immediately
+             if (section.id !== 'home') {
+                observer.observe(section);
+             }
+        });
+
+    </script>
+
+     <!-- Font Awesome Kit (Replace with your own if you have one, or use CDN) -->
+     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script> <!-- Example kit -->
+     <!-- Note: Using external JS kits slightly breaks the "single file" idea,
+          but is common for icons. You could download SVGs instead if strict single-file is needed. -->
+
+
 </body>
 </html>
